@@ -16,6 +16,9 @@ namespace ImporterConsole
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();
             var words = File.ReadAllLines(@"words.txt").ToList();
+            Console.WriteLine(firstnames.Count + " firstnames loaded");
+            Console.WriteLine(surnames.Count + " surnames loaded");
+            Console.WriteLine(words.Count + " book title words loaded");
 
             var rnd = new Random();
 
