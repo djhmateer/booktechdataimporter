@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-// Get large quantities of test Author and Book data for testing BookTech website
+// Get large quantities of Author and Book data for testing BookTech website
 // Needed for load testing, paging, filtering, sorting 
 namespace ImporterConsole
 {
@@ -42,9 +43,7 @@ namespace ImporterConsole
                     {
                         using (var cmd = new SqlCommand("INSERT INTO Books(Title, AuthorID) VALUES(@Title, @AuthorID)", connection))
                         {
-                            string firstWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
-                            string secondWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
-                            string bookTitle = firstWord + " of the " + secondWord;
+                            var bookTitle = GenerateBookTitle(words, rnd);
 
                             cmd.Parameters.AddWithValue("@Title", bookTitle);
                             cmd.Parameters.AddWithValue("@AuthorID", authorID);
@@ -54,6 +53,14 @@ namespace ImporterConsole
                     }
                 }
             }
+        }
+
+        private static string GenerateBookTitle(List<string> words, Random rnd)
+        {
+            string firstWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
+            string secondWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
+            string bookTitle = firstWord + " of the " + secondWord;
+            return bookTitle;
         }
     }
 }
