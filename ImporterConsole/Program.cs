@@ -16,14 +16,12 @@ namespace ImporterConsole
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();
             var words = File.ReadAllLines(@"words.txt").ToList();
-            Console.WriteLine(firstnames.Count + " firstnames loaded");
-            Console.WriteLine(surnames.Count + " surnames loaded");
-            Console.WriteLine(words.Count + " book title words loaded");
+
+            DisplaySummaryCountsOfLoadedFiles(firstnames, surnames, words);
 
             var rnd = new Random();
 
-            var connectionString = ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString;
-            using (var connection = new SqlConnection(connectionString))
+            using (var connection = new SqlConnection(GetConnectionString()))
             {
                 connection.Open();
                 // Insert Authors
@@ -56,6 +54,19 @@ namespace ImporterConsole
                     }
                 }
             }
+        }
+
+        private static string GetConnectionString()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString;
+            return connectionString;
+        }
+
+        private static void DisplaySummaryCountsOfLoadedFiles(List<string> firstnames, List<string> surnames, List<string> words)
+        {
+            Console.WriteLine(firstnames.Count + " firstnames loaded");
+            Console.WriteLine(surnames.Count + " surnames loaded");
+            Console.WriteLine(words.Count + " book title words loaded");
         }
 
         private static string GenerateBookTitle(List<string> words, Random rnd)
