@@ -5,10 +5,70 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-// Get large quantities of Author and Book data for testing BookTech website
-// Needed for load testing, paging, filtering, sorting 
+
 namespace ImporterConsole
 {
+    // C# Language definitions helper
+    public class Book
+    {
+        // Property
+        public string Title { get; set; }
+
+        // Field / private property / private variable
+        private string _title;
+
+        // Constuctor
+        public Book(){}
+
+    }
+
+    // BookRepository implements IBookRepository
+    public class BookRepository : IBookRepository
+    {
+        private readonly ILogger _log;
+
+        // Pure (Poor mans) constructor dependency injection
+        public BookRepository(ILogger log)
+        {
+            _log = log;
+        }
+
+        // Method with argument
+        public void SaveBook(Book book)
+        {
+            _log.Debug("Saving book");
+        }
+    }
+
+    public interface ILogger{void Debug(string message);}
+
+    public interface IBookRepository{}
+
+    // BookController is a BaseController (inheritance)
+    public class BookController : BaseController
+    {
+        // Field
+        // BookController has a BookRepository (composition)
+        private readonly IBookRepository _repo;
+
+        
+        public BookController(IBookRepository repo)
+        {
+            _repo = repo;
+        }
+
+        public ViewResult BookEdit(Book book)
+        {
+            // Passing an argument/parameter
+            _repo.SaveBook(book);
+        }
+    }
+
+    public class BaseController { }
+
+
+    // Get large quantities of Author and Book data for testing BookTech website
+    // Needed for load testing, paging, filtering, sorting 
     class Program
     {
         static void Main()
