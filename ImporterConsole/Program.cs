@@ -11,10 +11,11 @@ namespace ImporterConsole
     // C# Language definitions helper
     public class Book
     {
-        // Property
+        // Property (expose Fields)
         public string Title { get; set; }
 
-        // Field / private property / private variable
+        // Field (should almost alwyas be kept private) 
+        // private property / private variable
         private string _title;
 
         // Constuctor
@@ -33,7 +34,7 @@ namespace ImporterConsole
             _log = log;
         }
 
-        // Method with argument
+        // Book is a parameter (it is passed as an argument - value)
         public void SaveBook(Book book)
         {
             _log.Debug("Saving book");
@@ -59,7 +60,7 @@ namespace ImporterConsole
 
         public ViewResult BookEdit(Book book)
         {
-            // Passing an argument/parameter
+            // Passing an argument (the value)
             _repo.SaveBook(book);
         }
     }
