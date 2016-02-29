@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Refactored code after 1 - Simple Checks
+using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 
-
-namespace ImporterConsole
+// Make fake Author and Book data from firstname, surname, and word
+// text files for testing BookTech website
+namespace OneSpikeRefactored
 {
-    // Make fake Author and Book data from firstname, surname, and word
-    // text files for testing BookTech website
     class Program
     {
-        static void Mainx()
+        static void Main()
         {
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();
             var words = File.ReadAllLines(@"words.txt").ToList();
-
-            DisplaySummaryCountsOfLoadedFiles(firstnames, surnames, words);
-
+            Console.WriteLine(firstnames.Count + " firstnames loaded");
+            Console.WriteLine(surnames.Count + " surnames loaded");
+            Console.WriteLine(words.Count + " book title words loaded");
             var rnd = new Random();
-
-            using (var connection = new SqlConnection(GetConnectionString()))
+            var connectionString = ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString;
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 // Insert Authors
@@ -39,43 +38,21 @@ namespace ImporterConsole
                         cmd.Parameters.AddWithValue("@EmailAddress", autorEmail);
                         authorID = Convert.ToInt32(cmd.ExecuteScalar());
                     }
-
                     // Add random number of books to the newly created Author
                     for (int j = 0; j < rnd.Next(1, 7); j++)
                     {
                         using (var cmd = new SqlCommand("INSERT INTO Books(Title, AuthorID) VALUES(@Title, @AuthorID)", connection))
                         {
-                            var bookTitle = GenerateBookTitle(words, rnd);
-
+                            string firstWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
+                            string secondWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
+                            string bookTitle = firstWord + " of the " + secondWord;
                             cmd.Parameters.AddWithValue("@Title", bookTitle);
                             cmd.Parameters.AddWithValue("@AuthorID", authorID);
-
                             cmd.ExecuteScalar();
                         }
                     }
                 }
             }
-        }
-
-        private static string GetConnectionString()
-        {
-            string connectionString = ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString;
-            return connectionString;
-        }
-
-        private static void DisplaySummaryCountsOfLoadedFiles(List<string> firstnames, List<string> surnames, List<string> words)
-        {
-            Console.WriteLine(firstnames.Count + " firstnames loaded");
-            Console.WriteLine(surnames.Count + " surnames loaded");
-            Console.WriteLine(words.Count + " book title words loaded");
-        }
-
-        private static string GenerateBookTitle(List<string> words, Random rnd)
-        {
-            string firstWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
-            string secondWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
-            string bookTitle = firstWord + " of the " + secondWord;
-            return bookTitle;
         }
     }
 }
