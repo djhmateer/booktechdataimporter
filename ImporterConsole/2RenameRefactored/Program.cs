@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using ImporterConsole;
 using ImporterConsole1Spike;
 
 // Make fake Author and Book data from firstname, surname, and word
