@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
+using ImporterConsole1Spike;
 
 
 namespace ImporterConsole
@@ -12,7 +13,7 @@ namespace ImporterConsole
     // text files for testing BookTech website
     class Program
     {
-        static void Mainx()
+        static void Main()
         {
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();

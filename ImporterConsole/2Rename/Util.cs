@@ -1,4 +1,4 @@
-﻿namespace ImporterConsole
+﻿namespace TwoRename
 {
     public static class Util
     {
