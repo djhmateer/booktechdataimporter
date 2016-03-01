@@ -15,7 +15,7 @@ namespace Three
         static List<string> surnames;
         static List<string> words;
 
-        static void Main()
+        static void MainThree()
         {
             rnd = new Random();
             firstnames = File.ReadAllLines(@"firstnames.txt").ToList();

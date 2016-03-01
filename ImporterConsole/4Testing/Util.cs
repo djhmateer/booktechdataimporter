@@ -1,6 +1,9 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
 
 namespace Four
 {
@@ -11,6 +14,11 @@ namespace Four
             if (string.IsNullOrEmpty(s)) return s;
             if (s.Length == 1) return s.ToUpper();
             return s.Remove(1).ToUpper() + s.Substring(1);
+        }
+
+        public static List<string> LoadFile(string fileName)
+        {
+            return File.ReadAllLines(fileName).ToList();
         }
 
         public static SqlConnection GetOpenConnection()

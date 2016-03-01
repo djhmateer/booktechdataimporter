@@ -54,7 +54,11 @@
     <Compile Include="1Spike\Program.cs" />
     <Compile Include="3Shorter\AuthorAndBookGenerator.cs" />
     <Compile Include="3Shorter\Util.cs" />
+    <Compile Include="4Testing\Author.cs" />
     <Compile Include="4Testing\AuthorAndBookGenerator.cs" />
+    <Compile Include="4Testing\AuthorAndBookGeneratorTests.cs" />
+    <Compile Include="4Testing\Book.cs" />
+    <Compile Include="4Testing\Bootstrap.cs" />
     <Compile Include="4Testing\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="1SpikeRefactored\Util.cs" />
