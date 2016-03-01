@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Four
@@ -6,12 +8,12 @@ namespace Four
     [TestFixture]
     public class AuthorAndBookGeneratorTests
     {
-        private AuthorAndBookGenerator abg = new AuthorAndBookGenerator();
+        AuthorAndBookGenerator abg = new AuthorAndBookGenerator();
 
         [Test]
         public void given_file_of_firstnames_should_load_into_a_list_of_strings()
         {
-            List<string> firstnames = Util.LoadFile(@"c:\temp\firstnames.txt");
+            List<string> firstnames = File.ReadAllLines(@"c:\temp\firstnames.txt").ToList();
             Assert.AreEqual(8608, firstnames.Count);
         }
 
@@ -61,7 +63,7 @@ namespace Four
             var books = new List<Book> { new Book { Title = "Dummy title1" }, new Book { Title = "Dummy title2" } };
             var authorWithBooks = new Author { Firstname = "Dave", Surname = "Mateer", Books = books };
 
-            abg.WriteAuthorWithBooksToDb(authorWithBooks);
+            //abg.WriteAuthorWithBooksToDb(authorWithBooks);
         }
     }
 }

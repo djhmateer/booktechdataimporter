@@ -15,12 +15,7 @@ namespace Four
             if (s.Length == 1) return s.ToUpper();
             return s.Remove(1).ToUpper() + s.Substring(1);
         }
-
-        public static List<string> LoadFile(string fileName)
-        {
-            return File.ReadAllLines(fileName).ToList();
-        }
-
+       
         public static SqlConnection GetOpenConnection()
         {
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString);
