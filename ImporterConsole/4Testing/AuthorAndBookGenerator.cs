@@ -16,13 +16,16 @@ namespace Four
 
             for (int i = 0; i < 5; i++)
             {
-                Author author = GetRandomAuthor(firstnames, surnames);
-                Author authorWithBooks = GiveAuthorRandomNumberOfBooks(words, author);
-                WriteAuthorWithBooksToDb(authorWithBooks);
+                Author author = MakeRandomAuthor(firstnames, surnames);
+
+                List<Book> books = MakeRandomNumberOfBooks(words);
+                author.Books = books;
+
+                WriteAuthorWithBooksToDb(author);
             }
         }
 
-        public Author GetRandomAuthor(List<string> firstnames, List<string> surnames)
+        public Author MakeRandomAuthor(List<string> firstnames, List<string> surnames)
         {
             var r = GetRandom();
             string firstname = firstnames[r.Next(firstnames.Count)].CapitaliseFirstLetter();
@@ -30,17 +33,15 @@ namespace Four
             return new Author { Firstname = firstname, Surname = surname };
         }
 
-        public Author GiveAuthorRandomNumberOfBooks(List<string> words, Author author)
+        public List<Book> MakeRandomNumberOfBooks(List<string> words)
         {
             var books = new List<Book>();
-            // Give author a random number of books
             for (int j = 0; j < GetRandom().Next(1, 5); j++)
             {
                 Book book = GetBookTitle(words);
                 books.Add(book);
             }
-            author.Books = books;
-            return author;
+            return books;
         }
 
         public Book GetBookTitle(List<string> words)
@@ -55,15 +56,6 @@ namespace Four
 
             var book = new Book { Title = firstWord + " of the " + secondWord };
             return book;
-        }
-
-        // To stop similar random numbers use the same Random instance 
-        private static Random rnd;
-        private static Random GetRandom()
-        {
-            if (rnd != null) return rnd;
-            rnd = new Random();
-            return rnd;
         }
 
         public void WriteAuthorWithBooksToDb(Author authorWithBooks)
@@ -93,6 +85,15 @@ namespace Four
                     }
                 }
             }
+        }
+
+        // To stop similar random numbers use the same Random instance 
+        static Random _rnd;
+        static Random GetRandom()
+        {
+            if (_rnd != null) return _rnd;
+            _rnd = new Random();
+            return _rnd;
         }
     }
 }

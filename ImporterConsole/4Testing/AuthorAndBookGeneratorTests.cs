@@ -23,7 +23,7 @@ namespace Four
             var firstnames = new List<string> { "Dave" };
             var surnames = new List<string> { "Mateer" };
 
-            Author result = abg.GetRandomAuthor(firstnames, surnames);
+            Author result = abg.MakeRandomAuthor(firstnames, surnames);
 
             Assert.AreEqual("Dave", result.Firstname);
             Assert.AreEqual("Mateer", result.Surname);
@@ -35,7 +35,7 @@ namespace Four
             var firstnames = new List<string> { "dave" };
             var surnames = new List<string> { "mateer" };
 
-            Author result = abg.GetRandomAuthor(firstnames, surnames);
+            Author result = abg.MakeRandomAuthor(firstnames, surnames);
 
             Assert.AreEqual("Dave", result.Firstname);
             Assert.AreEqual("Mateer", result.Surname);
