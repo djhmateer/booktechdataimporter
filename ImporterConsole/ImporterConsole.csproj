@@ -48,7 +48,7 @@
     <Compile Include="2Rename\Program.cs" />
     <Compile Include="1SpikeRefactored\Program.cs" />
     <Compile Include="1Spike\Program.cs" />
-    <Compile Include="3Shorter\Program.cs" />
+    <Compile Include="3Shorter\AuthorAndBookGenerator.cs" />
     <Compile Include="3Shorter\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="1SpikeRefactored\Util.cs" />
