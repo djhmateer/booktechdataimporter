@@ -11,7 +11,7 @@ namespace TwoRename
 {
     class Program
     {
-        static void MainTwoRename()
+        static void MainTwo()
         {
             var fns = File.ReadAllLines(@"firstnames.txt").ToList();
             var sns = File.ReadAllLines(@"surnames.txt").ToList();

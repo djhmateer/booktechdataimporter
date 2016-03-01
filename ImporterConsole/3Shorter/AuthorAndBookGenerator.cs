@@ -29,7 +29,7 @@ namespace Three
             }
         }
 
-        private static int InsertRandomlyNamedAuthorAndReturnID()
+        static int InsertRandomlyNamedAuthorAndReturnID()
         {
             using (var connection = Util.GetOpenConnection())
             {
@@ -46,7 +46,7 @@ namespace Three
             }
         }
 
-        private static void AssignRandomNumberOfBookTitlesToAuthor(int authorID)
+        static void AssignRandomNumberOfBookTitlesToAuthor(int authorID)
         {
             using (var connection = Util.GetOpenConnection())
             {
@@ -63,7 +63,7 @@ namespace Three
             }
         }
 
-        private static string GenerateBookTitle()
+        static string GenerateBookTitle()
         {
             string firstWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();
             string secondWord = words[rnd.Next(words.Count)].CapitaliseFirstLetter();

@@ -58,7 +58,7 @@ namespace ImporterConsole1Spike
             {
                 connection.Open();
                 // insert 100 authors
-                for (int k = 0; k < 500; k++)
+                for (int k = 0; k < 10; k++)
                 {
                     int authorID = 0;
                     using (var cmd = new SqlCommand("INSERT INTO [Authors](FirstName, LastName,EmailAddress) VALUES(@FirstName, @LastName, @EmailAddress); SELECT SCOPE_IDENTITY()", connection))

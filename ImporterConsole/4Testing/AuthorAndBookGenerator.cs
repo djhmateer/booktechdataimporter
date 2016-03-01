@@ -11,7 +11,7 @@ namespace Four
         public void Run()
         {
             var firstnames = File.ReadAllLines("firstnames.txt").ToList(); 
-            var surnames = File.ReadAllLines("surnames.txt").ToList();
+            var surnames    = File.ReadAllLines("surnames.txt").ToList();
             var words = File.ReadAllLines("words.txt").ToList();
 
             for (int i = 0; i < 5; i++)

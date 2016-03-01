@@ -11,7 +11,7 @@ namespace OneSpikeRefactored
 {
     class Program
     {
-        static void MainOneS()
+        static void MainOneRF()
         {
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();

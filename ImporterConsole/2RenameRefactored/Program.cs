@@ -12,7 +12,7 @@ namespace TwoRenameRefactored
 {
     class Program
     {
-        static void MainTwoRefactored()
+        static void MainTwoRF()
         {
             var firstnames = File.ReadAllLines(@"firstnames.txt").ToList();
             var surnames = File.ReadAllLines(@"surnames.txt").ToList();
@@ -31,12 +31,12 @@ namespace TwoRenameRefactored
                     int authorID;
                     using (var cmd = new SqlCommand("INSERT INTO [Authors](FirstName, LastName,EmailAddress) VALUES(@FirstName, @LastName, @EmailAddress); SELECT SCOPE_IDENTITY()", cnn))
                     {
-                        string authorFirstname = firstnames[rnd.Next(firstnames.Count)];
-                        string authorSurname = surnames[rnd.Next(surnames.Count)].CapitaliseFirstLetter();
-                        string autorEmail = authorFirstname + "@" + authorSurname + ".com";
-                        cmd.Parameters.AddWithValue("@FirstName", authorFirstname);
-                        cmd.Parameters.AddWithValue("@LastName", authorSurname);
-                        cmd.Parameters.AddWithValue("@EmailAddress", autorEmail);
+                        var firstname = firstnames[rnd.Next(firstnames.Count)];
+                        var surname = surnames[rnd.Next(surnames.Count)].CapitaliseFirstLetter();
+                        var email = firstname + "@" + surname + ".com";
+                        cmd.Parameters.AddWithValue("@FirstName", firstname);
+                        cmd.Parameters.AddWithValue("@LastName", surname);
+                        cmd.Parameters.AddWithValue("@EmailAddress", email);
                         authorID = Convert.ToInt32(cmd.ExecuteScalar());
                     }
                     // Add random number of books to the newly created Author
