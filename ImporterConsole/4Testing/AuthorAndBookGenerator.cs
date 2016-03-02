@@ -10,9 +10,9 @@ namespace Four
     {
         public void Run()
         {
-            var firstnames = File.ReadAllLines("firstnames.txt").ToList(); 
-            var surnames    = File.ReadAllLines("surnames.txt").ToList();
-            var words = File.ReadAllLines("words.txt").ToList();
+            List<string> firstnames = File.ReadAllLines("firstnames.txt").ToList(); 
+            List<string> surnames    = File.ReadAllLines("surnames.txt").ToList();
+            List<string> words = File.ReadAllLines("words.txt").ToList();
 
             for (int i = 0; i < 5; i++)
             {
