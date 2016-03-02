@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
 
 namespace Four
 {
@@ -21,6 +18,15 @@ namespace Four
             var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["BookTechConnectionString"].ConnectionString);
             connection.Open();
             return connection;
+        }
+
+        // To stop similar random numbers use the same Random instance always
+        static Random rnd;
+        public static Random GetRandom()
+        {
+            if (rnd != null) return rnd;
+            rnd = new Random();
+            return rnd;
         }
     }
 }

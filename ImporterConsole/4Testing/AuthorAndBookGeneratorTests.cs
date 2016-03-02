@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Four
 {
@@ -20,8 +22,8 @@ namespace Four
         [Test]
         public void given_a_list_of_firstnames_and_surnames_should_return_a_fictional_author()
         {
-            var firstnames = new List<string> { "Dave" };
-            var surnames = new List<string> { "Mateer" };
+            var firstnames = new List<string> {"Dave"};
+            var surnames = new List<string> {"Mateer"};
 
             Author result = abg.MakeRandomAuthor(firstnames, surnames);
 
@@ -32,8 +34,8 @@ namespace Four
         [Test]
         public void given_a_list_of_firstnames_and_surnames_should_return_a_fictional_author_capitalised_both_names()
         {
-            var firstnames = new List<string> { "dave" };
-            var surnames = new List<string> { "mateer" };
+            var firstnames = new List<string> {"dave"};
+            var surnames = new List<string> {"mateer"};
 
             Author result = abg.MakeRandomAuthor(firstnames, surnames);
 
@@ -44,7 +46,7 @@ namespace Four
         [Test]
         public void given_a_list_of_words_should_return_a_book_title()
         {
-            var words = new List<string> { "hello", "world" };
+            var words = new List<string> {"hello", "world"};
 
             Book book = abg.GetBookTitle(words);
 
@@ -60,10 +62,33 @@ namespace Four
         [Test]
         public void given_an_author_and_2_books_should_save_to_the_db()
         {
-            var books = new List<Book> { new Book { Title = "Dummy title1" }, new Book { Title = "Dummy title2" } };
-            var authorWithBooks = new Author { Firstname = "Dave", Surname = "Mateer", Books = books };
+            var books = new List<Book> {new Book {Title = "Dummy title1"}, new Book {Title = "Dummy title2"}};
+            var authorWithBooks = new Author {Firstname = "Dave", Surname = "Mateer", Books = books};
 
             //abg.WriteAuthorWithBooksToDb(authorWithBooks);
+        }
+    }
+
+    [TestFixture]
+    public class UtilTests
+    {
+        [Test]
+        public void when_calling_getRandom_should_be_random()
+        {
+            var result1 = Util.GetRandom().Next(1, 100);
+            var result2 = Util.GetRandom().Next(1, 100);
+            var result3 = Util.GetRandom().Next(1, 100);
+            var result4 = Util.GetRandom().Next(1, 100);
+            Console.WriteLine(result1);
+            Console.WriteLine(result2);
+            Console.WriteLine(result3);
+            Console.WriteLine(result4);
+            bool resultsAllEqual =
+                (result1 == result2)
+                && (result2 == result3)
+                && (result3 == result4);
+
+            Assert.IsFalse(resultsAllEqual);
         }
     }
 }

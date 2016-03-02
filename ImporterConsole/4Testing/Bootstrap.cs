@@ -2,7 +2,7 @@ namespace Four
 {
     public class Bootstrap
     {
-        static void MainFour()
+        static void Main()
         {
             new AuthorAndBookGenerator().Run();
         }

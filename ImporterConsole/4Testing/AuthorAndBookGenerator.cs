@@ -10,9 +10,9 @@ namespace Four
     {
         public void Run()
         {
-            List<string> firstnames = File.ReadAllLines("firstnames.txt").ToList(); 
-            List<string> surnames    = File.ReadAllLines("surnames.txt").ToList();
-            List<string> words = File.ReadAllLines("words.txt").ToList();
+            var firstnames = File.ReadAllLines("firstnames.txt").ToList(); 
+            var surnames    = File.ReadAllLines("surnames.txt").ToList();
+            var words = File.ReadAllLines("words.txt").ToList();
 
             for (int i = 0; i < 5; i++)
             {
@@ -21,13 +21,26 @@ namespace Four
                 List<Book> books = MakeRandomNumberOfBooks(words);
                 author.Books = books;
 
-                WriteAuthorWithBooksToDb(author);
+                WriteAuthorWithBooksToScreen(author);
+                //WriteAuthorWithBooksToDb(author);
             }
+        }
+
+        private void WriteAuthorWithBooksToScreen(Author author)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(author.Firstname + " " + author.Surname);
+            Console.ForegroundColor = ConsoleColor.Gray;
+            foreach (var book in author.Books)
+            {
+                Console.WriteLine("  " + book.Title);
+            }
+            Console.WriteLine();
         }
 
         public Author MakeRandomAuthor(List<string> firstnames, List<string> surnames)
         {
-            var r = GetRandom();
+            var r = Util.GetRandom();
             string firstname = firstnames[r.Next(firstnames.Count)].CapitaliseFirstLetter();
             string surname = surnames[r.Next(surnames.Count)].CapitaliseFirstLetter();
             return new Author { Firstname = firstname, Surname = surname };
@@ -36,7 +49,7 @@ namespace Four
         public List<Book> MakeRandomNumberOfBooks(List<string> words)
         {
             var books = new List<Book>();
-            for (int j = 0; j < GetRandom().Next(1, 5); j++)
+            for (int j = 0; j < Util.GetRandom().Next(1, 5); j++)
             {
                 Book book = GetBookTitle(words);
                 books.Add(book);
@@ -46,7 +59,7 @@ namespace Four
 
         public Book GetBookTitle(List<string> words)
         {
-            var r = GetRandom();
+            var r = Util.GetRandom();
             int firstWordIndex = r.Next(words.Count);
             string firstWord = words[firstWordIndex].CapitaliseFirstLetter();
             words.RemoveAt(firstWordIndex);
@@ -87,13 +100,6 @@ namespace Four
             }
         }
 
-        // To stop similar random numbers use the same Random instance 
-        static Random _rnd;
-        static Random GetRandom()
-        {
-            if (_rnd != null) return _rnd;
-            _rnd = new Random();
-            return _rnd;
-        }
+       
     }
 }

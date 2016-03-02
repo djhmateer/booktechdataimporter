@@ -11,7 +11,7 @@ namespace ImporterConsole1Spike
 {
     class Program
     {
-        static void Main(string[] args)
+        static void MainOne(string[] args)
         {
             // goal is to get many 10,000's or millions of real book and author data
             // so can demo refactoring
